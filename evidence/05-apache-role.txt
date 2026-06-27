@@ -1,0 +1,36 @@
+
+PLAY [Install Apache and publish host facts page] ******************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [devops-lab]
+
+TASK [apache_host_info : Select Apache settings for the target OS] *************
+ok: [devops-lab]
+
+TASK [apache_host_info : Update apt cache on Debian family hosts] **************
+ok: [devops-lab]
+
+TASK [apache_host_info : Install Apache] ***************************************
+ok: [devops-lab]
+
+TASK [apache_host_info : Install UFW when firewall management is enabled] ******
+ok: [devops-lab]
+
+TASK [apache_host_info : Allow HTTP traffic through UFW] ***********************
+ok: [devops-lab]
+
+TASK [apache_host_info : Render Apache default page with host facts] ***********
+changed: [devops-lab]
+
+TASK [apache_host_info : Start Apache and enable it on boot] *******************
+ok: [devops-lab]
+
+TASK [apache_host_info : Check Apache web page availability] *******************
+ok: [devops-lab]
+
+RUNNING HANDLER [apache_host_info : Restart Apache] ****************************
+changed: [devops-lab]
+
+PLAY RECAP *********************************************************************
+devops-lab                 : ok=10   changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

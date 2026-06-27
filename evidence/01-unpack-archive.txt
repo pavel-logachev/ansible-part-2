@@ -1,0 +1,18 @@
+
+PLAY [Download and unpack an archive] ******************************************
+
+TASK [Ensure archive download directory exists] ********************************
+ok: [devops-lab]
+
+TASK [Ensure archive extraction directory exists] ******************************
+ok: [devops-lab]
+
+TASK [Download Apache Commons Lang source archive] *****************************
+ok: [devops-lab]
+
+TASK [Unpack downloaded archive] ***********************************************
+skipping: [devops-lab]
+
+PLAY RECAP *********************************************************************
+devops-lab                 : ok=3    changed=0    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+

@@ -1,0 +1,15 @@
+### syntax-check /work/playbooks/01_unpack_archive.yml
+
+playbook: /work/playbooks/01_unpack_archive.yml
+### syntax-check /work/playbooks/02_install_tuned.yml
+
+playbook: /work/playbooks/02_install_tuned.yml
+### syntax-check /work/playbooks/03_motd_variable.yml
+
+playbook: /work/playbooks/03_motd_variable.yml
+### syntax-check /work/playbooks/04_motd_facts.yml
+
+playbook: /work/playbooks/04_motd_facts.yml
+### syntax-check /work/playbooks/05_apache_role.yml
+
+playbook: /work/playbooks/05_apache_role.yml

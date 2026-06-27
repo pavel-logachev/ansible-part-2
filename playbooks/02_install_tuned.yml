@@ -1,0 +1,19 @@
+---
+- name: Install and enable tuned
+  hosts: devops_lab
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Install tuned package
+      ansible.builtin.apt:
+        name: tuned
+        state: present
+        update_cache: true
+        cache_valid_time: 3600
+
+    - name: Start tuned and enable it on boot
+      ansible.builtin.systemd:
+        name: tuned
+        state: started
+        enabled: true

@@ -1,0 +1,13 @@
+﻿HTTP 200
+  <title>Host facts for devops-lab</title>
+  <style>
+    <h1>Host facts: devops-lab</h1>
+    <table>
+        <td>4 vCPU</td>
+      </tr>
+        <th>RAM</th>
+        <td>7.8 GB</td>
+        <th>First HDD</th>
+        <td>sda 30.00 GB</td>
+        <th>IP address</th>
+        <td>172.30.48.172</td>

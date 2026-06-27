@@ -1,0 +1,59 @@
+---
+- name: Select Apache settings for the target OS
+  ansible.builtin.set_fact:
+    apache_package: "{{ apache_package_by_os_family[ansible_facts.os_family] | default('apache2') }}"
+    apache_service: "{{ apache_service_by_os_family[ansible_facts.os_family] | default('apache2') }}"
+    apache_index_path: "{{ apache_index_path_by_os_family[ansible_facts.os_family] | default('/var/www/html/index.html') }}"
+
+- name: Update apt cache on Debian family hosts
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+  when: ansible_facts.os_family == "Debian"
+
+- name: Install Apache
+  ansible.builtin.package:
+    name: "{{ apache_package }}"
+    state: present
+
+- name: Install UFW when firewall management is enabled
+  ansible.builtin.package:
+    name: ufw
+    state: present
+  when:
+    - apache_manage_ufw
+    - ansible_facts.os_family == "Debian"
+
+- name: Allow HTTP traffic through UFW
+  community.general.ufw:
+    rule: allow
+    port: "80"
+    proto: tcp
+  when:
+    - apache_manage_ufw
+    - ansible_facts.os_family == "Debian"
+
+- name: Render Apache default page with host facts
+  ansible.builtin.template:
+    src: index.html.j2
+    dest: "{{ apache_index_path }}"
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Restart Apache
+
+- name: Start Apache and enable it on boot
+  ansible.builtin.systemd:
+    name: "{{ apache_service }}"
+    state: started
+    enabled: true
+
+- name: Check Apache web page availability
+  ansible.builtin.uri:
+    url: "{{ apache_check_url }}"
+    status_code: 200
+    return_content: false
+  register: apache_http_check
+  retries: 5
+  delay: 2
+  until: apache_http_check.status == 200

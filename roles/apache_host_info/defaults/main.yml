@@ -1,0 +1,15 @@
+---
+apache_package_by_os_family:
+  Debian: apache2
+  RedHat: httpd
+
+apache_service_by_os_family:
+  Debian: apache2
+  RedHat: httpd
+
+apache_index_path_by_os_family:
+  Debian: /var/www/html/index.html
+  RedHat: /var/www/html/index.html
+
+apache_manage_ufw: true
+apache_check_url: "http://localhost/"

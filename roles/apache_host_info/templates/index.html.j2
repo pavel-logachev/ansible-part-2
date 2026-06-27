@@ -1,0 +1,66 @@
+{% set root_mounts = ansible_facts.mounts | selectattr('mount', 'equalto', '/') | list %}
+{% set root_device = root_mounts[0].device | default('') if root_mounts else '' %}
+{% set root_disk_name = root_device | regex_replace('^/dev/', '') | regex_replace('p?[0-9]+$', '') %}
+{% set disk_names = ansible_facts.devices.keys() | reject('match', '^(loop|ram|fd|sr)') | list %}
+{% set first_disk_name = root_disk_name if root_disk_name in ansible_facts.devices else (disk_names[0] if disk_names else 'unknown') %}
+{% set first_disk = ansible_facts.devices[first_disk_name] if first_disk_name != 'unknown' else {} %}
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Host facts for {{ ansible_facts.hostname }}</title>
+  <style>
+    body {
+      margin: 40px;
+      font-family: Arial, sans-serif;
+      color: #1f2937;
+      background: #f8fafc;
+    }
+    main {
+      max-width: 760px;
+    }
+    h1 {
+      margin: 0 0 24px;
+      font-size: 28px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #ffffff;
+    }
+    th,
+    td {
+      padding: 12px 14px;
+      border: 1px solid #d1d5db;
+      text-align: left;
+    }
+    th {
+      width: 32%;
+      background: #e5e7eb;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Host facts: {{ ansible_facts.hostname }}</h1>
+    <table>
+      <tr>
+        <th>CPU</th>
+        <td>{{ ansible_facts.processor_vcpus | default(ansible_facts.processor_count) }} vCPU</td>
+      </tr>
+      <tr>
+        <th>RAM</th>
+        <td>{{ (ansible_facts.memtotal_mb / 1024) | round(1) }} GB</td>
+      </tr>
+      <tr>
+        <th>First HDD</th>
+        <td>{{ first_disk_name }} {{ first_disk.size | default('unknown') }}</td>
+      </tr>
+      <tr>
+        <th>IP address</th>
+        <td>{{ ansible_facts.default_ipv4.address | default(ansible_facts.all_ipv4_addresses[0] | default('unknown')) }}</td>
+      </tr>
+    </table>
+  </main>
+</body>
+</html>

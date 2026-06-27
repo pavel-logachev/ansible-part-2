@@ -1,0 +1,12 @@
+
+PLAY [Install and enable tuned] ************************************************
+
+TASK [Install tuned package] ***************************************************
+ok: [devops-lab]
+
+TASK [Start tuned and enable it on boot] ***************************************
+ok: [devops-lab]
+
+PLAY RECAP *********************************************************************
+devops-lab                 : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

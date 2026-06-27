@@ -1,0 +1,9 @@
+---
+archive_url: "https://archive.apache.org/dist/commons/lang/source/commons-lang3-3.17.0-src.tar.gz"
+archive_download_path: "/tmp/ansible-homework/commons-lang3-3.17.0-src.tar.gz"
+archive_extract_dir: "/opt/ansible-homework/commons-lang3"
+
+motd_message: "Добро пожаловать на учебный сервер Ansible."
+motd_admin_wish: "Хорошего дня, системный администратор!"
+
+apache_manage_ufw: true

@@ -1,0 +1,17 @@
+---
+- name: Set MOTD with host facts
+  hosts: devops_lab
+  become: true
+  gather_facts: true
+
+  tasks:
+    - name: Write MOTD with IP address and hostname
+      ansible.builtin.copy:
+        dest: /etc/motd
+        content: |
+          Hostname: {{ ansible_facts.hostname }}
+          IP address: {{ ansible_facts.default_ipv4.address | default(ansible_facts.all_ipv4_addresses[0] | default('unknown')) }}
+          {{ motd_admin_wish }}
+        owner: root
+        group: root
+        mode: "0644"

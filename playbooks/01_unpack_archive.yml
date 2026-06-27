@@ -1,0 +1,39 @@
+---
+- name: Download and unpack an archive
+  hosts: devops_lab
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Ensure archive download directory exists
+      ansible.builtin.file:
+        path: "{{ archive_download_path | dirname }}"
+        state: directory
+        owner: root
+        group: root
+        mode: "0755"
+
+    - name: Ensure archive extraction directory exists
+      ansible.builtin.file:
+        path: "{{ archive_extract_dir }}"
+        state: directory
+        owner: root
+        group: root
+        mode: "0755"
+
+    - name: Download Apache Commons Lang source archive
+      ansible.builtin.get_url:
+        url: "{{ archive_url }}"
+        dest: "{{ archive_download_path }}"
+        owner: root
+        group: root
+        mode: "0644"
+
+    - name: Unpack downloaded archive
+      ansible.builtin.unarchive:
+        src: "{{ archive_download_path }}"
+        dest: "{{ archive_extract_dir }}"
+        remote_src: true
+        extra_opts:
+          - --strip-components=1
+        creates: "{{ archive_extract_dir }}/pom.xml"

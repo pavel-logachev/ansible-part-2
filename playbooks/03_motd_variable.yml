@@ -1,0 +1,14 @@
+---
+- name: Set MOTD from a variable
+  hosts: devops_lab
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Write MOTD from variable
+      ansible.builtin.copy:
+        dest: /etc/motd
+        content: "{{ motd_message }}\n"
+        owner: root
+        group: root
+        mode: "0644"

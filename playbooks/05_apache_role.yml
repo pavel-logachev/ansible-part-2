@@ -1,0 +1,8 @@
+---
+- name: Install Apache and publish host facts page
+  hosts: devops_lab
+  become: true
+  gather_facts: true
+
+  roles:
+    - apache_host_info
