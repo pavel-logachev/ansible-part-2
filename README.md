@@ -5,7 +5,7 @@
 - Управляемый хост: `devops-lab`
 - ОС: Ubuntu Server 24.04.4 LTS
 - Пользователь для подключения: `pavel`
-- Inventory: `inventory.ini`
+- Inventory: [inventory.ini](inventory.ini)
 
 ## Подготовка
 
@@ -29,7 +29,7 @@ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.ini --private-key 
 
 ### 1. Скачать архив, создать папку и распаковать архив
 
-Файл: `playbooks/01_unpack_archive.yml`
+Файл: [playbooks/01_unpack_archive.yml](playbooks/01_unpack_archive.yml)
 
 Плейбук:
 
@@ -40,7 +40,7 @@ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.ini --private-key 
 
 ### 2. Установить tuned, запустить демон и добавить в автозагрузку
 
-Файл: `playbooks/02_install_tuned.yml`
+Файл: [playbooks/02_install_tuned.yml](playbooks/02_install_tuned.yml)
 
 Плейбук:
 
@@ -50,9 +50,9 @@ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.ini --private-key 
 
 ### 3. Изменить приветствие системы с использованием переменной
 
-Файл: `playbooks/03_motd_variable.yml`
+Файл: [playbooks/03_motd_variable.yml](playbooks/03_motd_variable.yml)
 
-Переменная задана в `group_vars/all.yml`:
+Переменная задана в [group_vars/all.yml](group_vars/all.yml):
 
 ```yaml
 motd_message: "Добро пожаловать на учебный сервер Ansible."
@@ -62,7 +62,7 @@ motd_message: "Добро пожаловать на учебный сервер 
 
 ## Задание 2
 
-Файл: `playbooks/04_motd_facts.yml`
+Файл: [playbooks/04_motd_facts.yml](playbooks/04_motd_facts.yml)
 
 Плейбук модифицирует решение из задания 1.3 и записывает в `/etc/motd`:
 
@@ -79,9 +79,9 @@ motd_message: "Добро пожаловать на учебный сервер 
 
 ## Задание 3
 
-Плейбук: `playbooks/05_apache_role.yml`
+Плейбук: [playbooks/05_apache_role.yml](playbooks/05_apache_role.yml)
 
-Роль: `roles/apache_host_info`
+Роль: [roles/apache_host_info](roles/apache_host_info)
 
 Роль выполняет следующие действия:
 
@@ -99,14 +99,14 @@ motd_message: "Добро пожаловать на учебный сервер 
 
 Выводы сохранены в папке `evidence`:
 
-- `evidence/00-ansible-version.txt`
-- `evidence/01-unpack-archive.txt`
-- `evidence/02-install-tuned.txt`
-- `evidence/03-motd-variable.txt`
-- `evidence/04-motd-facts.txt`
-- `evidence/05-apache-role.txt`
-- `evidence/06-apache-page-check.txt`
-- `evidence/07-syntax-check.txt`
+- [evidence/00-ansible-version.txt](evidence/00-ansible-version.txt)
+- [evidence/01-unpack-archive.txt](evidence/01-unpack-archive.txt)
+- [evidence/02-install-tuned.txt](evidence/02-install-tuned.txt)
+- [evidence/03-motd-variable.txt](evidence/03-motd-variable.txt)
+- [evidence/04-motd-facts.txt](evidence/04-motd-facts.txt)
+- [evidence/05-apache-role.txt](evidence/05-apache-role.txt)
+- [evidence/06-apache-page-check.txt](evidence/06-apache-page-check.txt)
+- [evidence/07-syntax-check.txt](evidence/07-syntax-check.txt)
 
 Краткий результат выполнения:
 
@@ -133,4 +133,4 @@ IP address: 172.30.48.172
 
 ## Архив роли
 
-Архив роли для отправки: `apache_host_info-role.zip`.
+Архив роли для отправки: [apache_host_info-role.zip](apache_host_info-role.zip).
